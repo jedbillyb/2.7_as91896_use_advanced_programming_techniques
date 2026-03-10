@@ -1,4 +1,5 @@
 from tkinter import *
+from turtle import left
 from tkcalendar import Calendar, DateEntry
 
 # Close the application window
@@ -19,21 +20,17 @@ def entry_print():
     # For example, you could calculate the total cost or the materials required for the hired items
 
 # Set up the GUI interface
-def main(cal):
-    Button(main_window, text="Quit", command=quit).grid(row=0, column=0)
-    Button(main_window, text="Calculate", command=entry_print).grid(row=0, column=1)
-    Label(main_window, text="First Name").grid(row=1, column=0)
-    Label(main_window, text="Last Name").grid(row=2, column=0)
-    Label(main_window, text="Receipt number").grid(row=3, column=0)
-    Label(main_window, text="Item Hired").grid(row=4, column=0)
-    Label(main_window, text="Number Hired").grid(row=5, column=0)
-    Label(main_window, text="Date Item is Hired From:").grid(row=6, column=0)
-    Label(main_window, text="Day").grid(row=7, column=0)
-    Label(main_window, text="Month").grid(row=8, column=0)
-    Label(main_window, text="Year").grid(row=9, column=0)
-    Label(main_window, text="Date Item will be Returned:").grid(row=12, column=0)
-    cal = DateEntry(main_window, width=12, background='darkblue',
-                foreground='white', borderwidth=2)
+def main():
+    Button(main_window, text="Quit", command=quit).grid(row=0, column=0, sticky=W)
+    Button(main_window, text="Calculate", command=entry_print).grid(row=0, column=1, padx=10, pady=5, sticky=W)
+    Label(main_window, text="First Name:").grid(row=1, column=0, sticky=W)
+    Label(main_window, text="Last Name:").grid(row=2, column=0, sticky=W)
+    Label(main_window, text="Receipt number:").grid(row=3, column=0, sticky=W)
+    Label(main_window, text="Item Hired:").grid(row=4, column=0, sticky=W)
+    Label(main_window, text="Number Hired:").grid(row=5, column=0, sticky=W)
+    Label(main_window, text="Date Item is Hired From:").grid(row=6, column=0, sticky=W)
+    Label(main_window, text="Date Item will be Returned:").grid(row=7, column=0, sticky=W)
+    cal = DateEntry(main_window, width=12, background='darkblue', foreground='white', borderwidth=2)
     main_window.mainloop()
 
 # Initialize main window and entry fields
@@ -46,17 +43,17 @@ number_hired = Entry(main_window)
 day_hired_from = Entry(main_window)
 month_hired_from = Entry(main_window)
 year_hired_from = Entry(main_window)
+calendar = DateEntry(main_window, width=12, background='darkblue', foreground='white', borderwidth=2)
+calendar2 = DateEntry(main_window, width=12, background='darkblue', foreground='white', borderwidth=2)
 
 
 date_returned = Entry(main_window)
-first_name.grid(row=1, column=1,sticky=W, padx=10, pady=5)
-last_name.grid(row=2, column=1, sticky=W, padx=10, pady=5)
-receipt_number.grid(row=3, column=1, sticky=W, padx=10, pady=5)
-item_hired.grid(row=4, column=1, sticky=W, padx=10, pady=5)
-number_hired.grid(row=5, column=1, sticky=W, padx=10, pady=5)
-day_hired_from.grid(row=7, column=1, sticky=W, padx=10, pady=5)
-month_hired_from.grid(row=8, column=1, sticky=W, padx=10, pady=5)
-year_hired_from.grid(row=9, column=1, sticky=W, padx=10, pady=5)
-date_returned.grid(row=12, column=1, sticky=W, padx=10, pady=5)
-cal.pack(pady=20)
+first_name.grid(row=1, column=1, padx=10, pady=5)
+last_name.grid(row=2, column=1, padx=10, pady=5)
+receipt_number.grid(row=3, column=1, padx=10, pady=5)
+item_hired.grid(row=4, column=1, padx=10, pady=5)
+number_hired.grid(row=5, column=1, padx=10, pady=5)
+calendar.grid(row=6, column=1, padx=10, pady=5, sticky=W)   
+calendar2.grid(row=7, column=1, padx=10, pady=5, sticky=W)
+
 main()
