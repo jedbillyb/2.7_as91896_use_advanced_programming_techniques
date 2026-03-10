@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter.messagebox import showerror
 from turtle import left
 from tkcalendar import Calendar, DateEntry
 
@@ -7,14 +8,7 @@ def quit():
     main_window.destroy()  
 
 # Calculate deck materials needed based on user input
-def entry_print():
-    first_name = entry1.get()
-    last_name = entry2.get()
-    receipt_number = entry3.get()
-    item_hired = entry4.get()
-    number_hired = int(entry5.get())
-    date_hired_from = entry6.get()
-    date_returned = entry7.get()
+1
 
     # Here you would add the logic to calculate the materials needed based on the input
     # For example, you could calculate the total cost or the materials required for the hired items
@@ -56,4 +50,6 @@ number_hired.grid(row=5, column=1, padx=10, pady=5)
 calendar.grid(row=6, column=1, padx=10, pady=5, sticky=W)   
 calendar2.grid(row=7, column=1, padx=10, pady=5, sticky=W)
 
+if first_name.get() == "" or last_name.get() == "":
+   showerror("Error", "Please enter both first and last name.")
 main()
