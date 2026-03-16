@@ -77,14 +77,14 @@ def calculate():
     except ValueError:
         error_print_list.append("number hired")
 
-    # print error -------------------------------------------------------------
+    # print error --------------------------------------------------------------
     if first_name.get() == "" or last_name.get() == "" or receipt_number.get() == "" or item_hired.get() == "" or number_hired.get() == "":
         showerror("Error", f"Please fill in all fields: {', '.join(error_print_list)}")
 
-# create main window ------------------------------------------------------------
+# create main window -----------------------------------------------------------
 main_window = Tk()
 
-# create entry boxes ------------------------------------------------------------
+# create entry boxes -----------------------------------------------------------
 first_name = Entry(main_window)
 last_name = Entry(main_window)
 receipt_number = Entry(main_window)
@@ -96,7 +96,7 @@ year_hired_from = Entry(main_window)
 calendar = DateEntry(main_window, padx=10, pady=5, background='darkblue', foreground='white', borderwidth=2)
 calendar2 = DateEntry(main_window, padx=10, pady=5, background='darkblue', foreground='white', borderwidth=2)
 
-# grid entry boxes --------------------------------------------------------------
+# grid entry boxes ------------------------------------------------------------
 date_returned = Entry(main_window)
 first_name.grid(row=1, column=1, padx=10, pady=5)
 last_name.grid(row=2, column=1, padx=10, pady=5)
@@ -106,5 +106,5 @@ number_hired.grid(row=5, column=1, padx=10, pady=5)
 calendar.grid(row=6, column=1, padx=10, pady=5, sticky=W)   
 calendar2.grid(row=7, column=1, padx=10, pady=5, sticky=W)
 
-# main loop ---------------------------------------------------------------------
+# main loop --------------------------------------------------------------------
 main()
