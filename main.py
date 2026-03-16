@@ -6,7 +6,7 @@ from tkcalendar import Calendar, DateEntry
 def quit():
     main_window.destroy()  
 
-error_print_list = []
+
 
 first_name_list = []
 last_name_list = []
@@ -32,31 +32,47 @@ def main():
     main_window.mainloop() 
 
 def calculate():
+    error_print_list = []
+
+    # first name
     if first_name.get() == "":
         error_print_list.append("first name")
     else:
         first_name_list.append(first_name.get())
         print(first_name_list)
-        
+    
+    # last name
     if last_name.get() == "":
         error_print_list.append("last name")
     else:
         last_name_list.append(last_name.get())
         print(last_name_list)
     
-    if receipt_number.get() == "":
+    # receipt number
+    try:
+        int(receipt_number.get())
+    
+    except ValueError:
         error_print_list.append("receipt number")
-    else:        
-        receipt_number_list.append(receipt_number.get())
-        print(receipt_number_list)
 
+    # item hired
     if item_hired.get() == "":
         error_print_list.append("item hired")
     else:
         item_hired_list.append(item_hired.get())
         print(item_hired_list)
+
+    # number hired
+    try:
+        value = int(number_hired.get())
+        if not 1 <= value <= 500:
+            error_print_list.append("number hired (must be 1–500)")
     
-    if first_name.get() == "" or last_name.get() == "" or receipt_number.get() == "" or item_hired.get() == "":
+    except ValueError:
+        error_print_list.append("number hired")
+
+    # print error 
+    if first_name.get() == "" or last_name.get() == "" or receipt_number.get() == "" or item_hired.get() == "" or number_hired.get() == "":
         showerror("Error", f"Please fill in all fields: {', '.join(error_print_list)}")
 
 main_window = Tk()
