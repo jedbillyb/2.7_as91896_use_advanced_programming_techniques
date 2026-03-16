@@ -6,11 +6,17 @@ from tkcalendar import Calendar, DateEntry
 def quit():
     main_window.destroy()  
 
-def calculate():
-    if first_name.get() == "" or last_name.get() == "" or receipt_number.get() == "" or item_hired.get() == "" or number_hired.get() == "" or calendar.get_date() == "" or calendar2.get_date() == "":
-        showerror("Error", "Please fill in all fields.")
-    else:
-        
+error_print_list = []
+
+first_name_list = []
+last_name_list = []
+receipt_number_list = []
+item_hired_list = []
+number_hired_list = []
+day_hired_from_list = []
+month_hired_from_list = []
+year_hired_from_list = []
+date_returned_list = []
 
 def main():
     Button(main_window, text="Quit", command=quit).grid(row=0, column=0, sticky=W)
@@ -25,8 +31,33 @@ def main():
     cal = DateEntry(main_window, width=12, background='darkblue', foreground='white', borderwidth=2)
     main_window.mainloop() 
 
+def calculate():
+    if first_name.get() == "":
+        error_print_list.append("first name")
+    else:
+        first_name_list.append(first_name.get())
+        print(first_name_list)
+        
+    if last_name.get() == "":
+        error_print_list.append("last name")
+    else:
+        last_name_list.append(last_name.get())
+        print(last_name_list)
+    
+    if receipt_number.get() == "":
+        error_print_list.append("receipt number")
+    else:        
+        receipt_number_list.append(receipt_number.get())
+        print(receipt_number_list)
 
-
+    if item_hired.get() == "":
+        error_print_list.append("item hired")
+    else:
+        item_hired_list.append(item_hired.get())
+        print(item_hired_list)
+    
+    if first_name.get() == "" or last_name.get() == "" or receipt_number.get() == "" or item_hired.get() == "":
+        showerror("Error", f"Please fill in all fields: {', '.join(error_print_list)}")
 
 main_window = Tk()
 first_name = Entry(main_window)
