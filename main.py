@@ -2,7 +2,6 @@
 from concurrent.interpreters import create
 from tkinter import *
 from tkinter.messagebox import showerror
-from turtle import left
 from tkcalendar import Calendar, DateEntry\
 
 # create lists to store data ---------------------------------------------------
@@ -15,29 +14,28 @@ day_hired_from_list = []
 month_hired_from_list = []
 year_hired_from_list = []
 date_returned_list = []
+database_list = []
 
 # quit function ----------------------------------------------------------------
 def quit():
     main_window.destroy()  
 
 # calculate main function ------------------------------------------------------
-def calculate():
+def add():
+    row = 1
+
     # create error list, also used to clear error list for next time -----------
     error_print_list = []
 
     # first name ---------------------------------------------------------------
     if first_name.get() == "":
         error_print_list.append("first name")
-    else:
-        first_name_list.append(first_name.get())
-        print(first_name_list) 
 
     # last name ----------------------------------------------------------------
     if last_name.get() == "":
         error_print_list.append("last name")
     else:
         last_name_list.append(last_name.get())
-        print(last_name_list)
 
     # receipt number -----------------------------------------------------------
     try:
@@ -53,7 +51,6 @@ def calculate():
         error_print_list.append("item hired")
     else:
         item_hired_list.append(item_hired.get())
-        print(item_hired_list)
 
     # number hired -------------------------------------------------------------
     try:
@@ -63,15 +60,51 @@ def calculate():
     except ValueError:
         error_print_list.append("number hired")
 
+    record = {
+        "id":         row,
+        "first_name": first_name.get(),
+        "last_name":  last_name.get(),
+        "receipt_no": int(receipt_number.get()),
+        "item":       item_hired.get(),
+        "quantity":   int(number_hired.get()),
+        "date_from":  calendar.get_date(),
+        "date_to":    calendar2.get_date(),
+    }
+    database_list.append(record)
+    print(database_list)
+
     # print error --------------------------------------------------------------
     if first_name.get() == "" or last_name.get() == "" or receipt_number.get() == "" or item_hired.get() == "" or number_hired.get() == "":
         showerror("Error", f"Please fill in all fields: {', '.join(error_print_list)}")
 
+def delete():
+    try:
+        target = int(receipt_number.get())
+    except ValueError:
+        showerror("Error", "Enter a valid receipt number to delete")
+
+
+    # find the record
+    found = None
+    for record in database_list:
+        if record["receipt_no"] == target:
+            found = record
+            break  # stop searching once we find it
+
+    # remove it, or show error
+    if found:
+        database_list.remove(found)
+        print(f"Deleted receipt {target}")
+        print(database_list)
+    else:
+        showerror("Not found", f"Receipt {target} not found") 
+   
 # main function ----------------------------------------------------------------
 def main():
     # create buttons and labels ------------------------------------------------
-    Button(main_window, text="Quit", command=quit, width=55).grid(row=0, column=0, columnspan=2)
-    Button(main_window, text="Calculate", command=calculate, width=55, pady=5).grid(row=8, column=0, columnspan=2)
+    Button(main_window, text="Quit", command=quit, width=40).grid(row=0, column=0, columnspan=2)
+    Button(main_window, text="Add", command=add, width=20, pady=5).grid(row=8, column=0)
+    Button(main_window, text="Delete", command=delete, width=20, pady=5).grid(row=8, column=1)
     Label(main_window, text="First Name:").grid(row=1, column=0, sticky=W)
     Label(main_window, text="Last Name:").grid(row=2, column=0, sticky=W)
     Label(main_window, text="Receipt number:").grid(row=3, column=0, sticky=W)
@@ -96,8 +129,8 @@ number_hired = Entry(main_window)
 day_hired_from = Entry(main_window)
 month_hired_from = Entry(main_window)
 year_hired_from = Entry(main_window)
-calendar = DateEntry(main_window, padx=10, pady=5, background='darkblue', foreground='white', borderwidth=2)
-calendar2 = DateEntry(main_window, padx=10, pady=5, background='darkblue', foreground='white', borderwidth=2)
+calendar = DateEntry(main_window, width=18, pady=5, background='darkblue', foreground='white', borderwidth=2)
+calendar2 = DateEntry(main_window, width=18, pady=5, background='darkblue', foreground='white', borderwidth=2)
 
 # grid entry boxes ------------------------------------------------------------
 date_returned = Entry(main_window)
