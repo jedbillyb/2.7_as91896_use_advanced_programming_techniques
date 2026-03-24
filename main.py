@@ -48,7 +48,7 @@ def clear_fields(table):
     receipt_number.delete(0, END)
     item_hired.delete(0, END)
     number_hired.delete(0, END)
-    refresh_table()
+    refresh_table(table)
 
 # calculate main function ------------------------------------------------------
 def add():
@@ -128,7 +128,7 @@ def delete():
         clear_fields()
         print(database_list)
         showinfo("Deleted", f"Receipt {target} has been deleted")
-        refresh_table()
+        refresh_table(table)
     else:
         showerror("Not found", f"Receipt {target} not found") 
         clear_fields()
