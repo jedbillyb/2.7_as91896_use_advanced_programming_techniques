@@ -89,37 +89,23 @@ def add():
             error_print_list.append("number hired (must be 1–500)")
     except ValueError:
         error_print_list.append("number hired")
-
-    record = {
-        "id":         row,
-        "first_name": first_name.get(),
-        "last_name":  last_name.get(),
-        "receipt_no": receipt_number.get(),
-        "item":       item_hired.get(),
-        "quantity":   number_hired.get(),
-        "date_from":  calendar.get_date(),
-        "date_to":    calendar2.get_date(),
-    }
-    database_list.append(record)
-    print(database_list)
-    print("1", error_print_list)
     
-    if error_print_list == "":
-        table.insert("", END, values=(
-            len(database_list),
-            first_name.get(),
-            last_name.get(),
-            receipt_number.get(),
-            item_hired.get(),
-            number_hired.get(),
-            calendar.get_date(),
-            calendar2.get_date()
-        ))
+    if not error_print_list:        
+        record = {
+            "id":         row,
+            "first_name": first_name.get(),
+            "last_name":  last_name.get(),
+            "receipt_no": receipt_number.get(),
+            "item":       item_hired.get(),
+            "quantity":   number_hired.get(),
+            "date_from":  calendar.get_date(),
+            "date_to":    calendar2.get_date(),
+        }
+        database_list.append(record)  
+        refresh_table(table)
+        clear_fields(table)
     else:
-        if first_name.get() == "" or last_name.get() == "" or receipt_number.get() == "" or item_hired.get() == "" or number_hired.get() == "":
-            showerror("Error", f"Please fill in all fields: {', '.join(error_print_list)}")
-        else:
-            clear_fields()
+        showerror("Error", f"Please fill in: {', '.join(error_print_list)}")
     
 def delete():
     try:
