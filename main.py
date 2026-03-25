@@ -21,6 +21,20 @@ database_list = []
 def quit():
     main_window.destroy()
 
+def refresh_table(table):
+    table.delete(*table.get_children())  # clear all rows
+    for i, record in enumerate(database_list, 1):
+        table.insert("", END, values=(
+            i,
+            record["first_name"],
+            record["last_name"],
+            record["receipt_no"],
+            record["item"],
+            record["quantity"],
+            record["date_from"],
+            record["date_to"]
+        ))
+
 def table_setup():
     global table
 
@@ -125,32 +139,18 @@ def delete():
     if found:
         database_list.remove(found)
         print(f"Deleted receipt {target}")
-        clear_fields()
+        clear_fields(table)
         print(database_list)
         showinfo("Deleted", f"Receipt {target} has been deleted")
         refresh_table(table)
     else:
         showerror("Not found", f"Receipt {target} not found") 
-        clear_fields()
-
-def refresh_table(table):
-    table.delete(*table.get_children())  # clear all rows
-    for i, record in enumerate(database_list, 1):
-        table.insert("", END, values=(
-            i,
-            record["first_name"],
-            record["last_name"],
-            record["receipt_no"],
-            record["item"],
-            record["quantity"],
-            record["date_from"],
-            record["date_to"]
-        ))
+        clear_fields(table)
 
 # main function ----------------------------------------------------------------
 def main():
     # create buttons and labels ------------------------------------------------
-    Button(top_frame, text="Clear", command=clear_fields, width=20, pady=5).grid(row=9, column=0, columnspan=2)
+    Button(top_frame, text="Clear", command=lambda: clear_fields(table), width=20, pady=5).grid(row=9, column=0, columnspan=2)
     Button(top_frame, text="Quit", command=quit, width=40).grid(row=0, column=0, columnspan=2)
     Button(top_frame, text="Add", command=add, width=20, pady=5).grid(row=8, column=0)
     Button(top_frame, text="Delete", command=delete, width=20, pady=5).grid(row=8, column=1)
