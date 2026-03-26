@@ -131,24 +131,24 @@ def delete():
             showerror("Error", "Row number must be a number")
             return
 
-    # find the record
-    found = None
-    for record in database_list:
-        if record["id"] == target:
-            found = record
-            break  # stop searching once we find it
+        # find the record
+        found = None
+        for record in database_list:
+            if record["id"] == target:
+                found = record
+                break  # stop searching once we find it
 
-    # remove it, or show error
-    if found:
-        database_list.remove(found)
-        print(f"Deleted row {target}")
-        clear_fields(table)
-        print(database_list)
-        showinfo("Deleted", f"Row {target} has been deleted")
-        refresh_table(table)
-    else:
-        showerror("Not found", f"Row {target} not found") 
-        clear_fields(table)
+        # remove it, or show error
+        if found:
+            database_list.remove(found)
+            print(f"Deleted row {target}")
+            clear_fields(table)
+            print(database_list)
+            showinfo("Deleted", f"Row {target} has been deleted")
+            refresh_table(table)
+        else:
+            showerror("Not found", f"Row {target} not found") 
+            clear_fields(table)
 
 # main function ----------------------------------------------------------------
 def main():
