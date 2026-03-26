@@ -127,6 +127,9 @@ def delete():
     else:
         try:
             target = int(row_id.get())
+            if target <1:
+                showerror("Error", "Row number must be 1 or above")
+                return
         except ValueError:
             showerror("Error", "Row number must be a number")
             return
