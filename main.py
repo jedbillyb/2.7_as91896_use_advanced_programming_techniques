@@ -129,6 +129,7 @@ def delete():
             target = int(row_id.get())
         except ValueError:
             showerror("Error", "Row number must be a number")
+            return
 
     # find the record
     found = None
