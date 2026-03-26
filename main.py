@@ -1,5 +1,4 @@
 # import modules 
-from concurrent.interpreters import create
 from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import showerror, showinfo
@@ -133,21 +132,13 @@ def delete():
             showerror("Error", "Row number must be a number")
             return
 
-        found = None
-        for record in database_list:
-            if record["id"] == target:
-                found = record
-                break
-
-        if found:
-            database_list.remove(found)
+        if 1 <= target <= len(database_list):
+            database_list.pop(target - 1)
             print(f"Deleted row {target}")
-            clear_fields(table)
-            print(database_list)
             showinfo("Deleted", f"Row {target} has been deleted")
-            refresh_table(table)
+            clear_fields(table)
         else:
-            showerror("Not found", f"Row {target} not found") 
+            showerror("Not found", f"Row {target} not found")
             clear_fields(table)
 
 # build the GUI layout and start the main loop
@@ -166,9 +157,7 @@ def main():
     Label(top_frame, text="Date Item will be Returned:").grid(row=7, column=0, sticky=W)
     Label(top_frame, text="Row #:").grid(row=9, column=1, sticky=W)
 
-    cal = DateEntry(top_frame, width=12, background='darkblue', foreground='white', borderwidth=2)
-
-    top_frame.mainloop() 
+    main_window.mainloop() 
 
 main_window = Tk()
 top_frame = Frame(main_window)
@@ -184,14 +173,10 @@ last_name = Entry(top_frame)
 receipt_number = Entry(top_frame)
 item_hired = Entry(top_frame)
 number_hired = Entry(top_frame)
-day_hired_from = Entry(top_frame)
-month_hired_from = Entry(top_frame)
-year_hired_from = Entry(top_frame)
 calendar = DateEntry(top_frame, width=18, pady=5, background='darkblue', foreground='white', borderwidth=2)
 calendar2 = DateEntry(top_frame, width=18, pady=5, background='darkblue', foreground='white', borderwidth=2)
 row_id = Entry(top_frame)
 
-date_returned = Entry(top_frame)
 first_name.grid(row=1, column=1, padx=10, pady=5)
 last_name.grid(row=2, column=1, padx=10, pady=5)
 receipt_number.grid(row=3, column=1, padx=10, pady=5)
