@@ -1,7 +1,7 @@
 # import modules 
 from tkinter import *
 from tkinter import ttk
-from tkinter.messagebox import showerror, showinfo
+from tkinter.messagebox import showerror
 from tkcalendar import Calendar, DateEntry
 from datetime import date
 
@@ -80,6 +80,9 @@ def add():
             error_print_list.append("receipt number")
         else:
             error_print_list.append("receipt number (must be a number)")
+    
+    if receipt_number.get() in [record["receipt_no"] for record in database_list]:
+        error_print_list.append("receipt number (already exists)")
 
     if item_hired.get() == "":
         error_print_list.append("item hired")
@@ -104,12 +107,11 @@ def add():
 
     if not error_print_list:        
         record = {
-            "id":         len(database_list) + 1,
             "first_name": first_name.get(),
             "last_name":  last_name.get(),
             "receipt_no": receipt_number.get(),
             "item":       item_hired.get(),
-            "quantity":   number_hired.get(),
+            "quantity":   int(number_hired.get()),
             "date_from":  calendar.get_date(),
             "date_to":    calendar2.get_date(),
         }
@@ -137,7 +139,6 @@ def delete():
             database_list.pop(target - 1)
             clear_fields(table)
             print(f"Deleted row {target}")
-            showinfo("Deleted", f"Row {target} has been deleted")
         else:
             showerror("Not found", f"Row {target} not found")
             clear_fields(table)
