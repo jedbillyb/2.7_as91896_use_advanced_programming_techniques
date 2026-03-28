@@ -8,7 +8,7 @@ from datetime import date
 # database for the hire records
 database_list = []
 
-# close the window and quit_app the program function
+# close the window and exit the program function
 def quit_app():
     main_window.destroy()
 
