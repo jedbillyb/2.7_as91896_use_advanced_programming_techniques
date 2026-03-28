@@ -2,14 +2,14 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import showerror
-from tkcalendar import Calendar, DateEntry
+from tkcalendar import DateEntry
 from datetime import date
 
 # database for the hire records
 database_list = []
 
-# close the window and quit the program function
-def quit():
+# close the window and quit_app the program function
+def quit_app():
     main_window.destroy()
 
 # clear and refresh the data with latest data
@@ -146,7 +146,7 @@ def delete():
 # build the GUI layout and start the main loop
 def main():
     Button(top_frame, text="Clear", command=lambda: clear_fields(table), width=20, pady=5).grid(row=9, column=0)
-    Button(top_frame, text="Quit", command=quit, width=40).grid(row=0, column=0, columnspan=2)
+    Button(top_frame, text="Quit", command=quit_app, width=40).grid(row=0, column=0, columnspan=2)
     Button(top_frame, text="Add", command=add, width=20, pady=5).grid(row=8, column=0)
     Button(top_frame, text="Delete", command=delete, width=20, pady=5).grid(row=8, column=1)
 
