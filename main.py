@@ -121,7 +121,7 @@ def add():
             error_print_list.append("number hired (must be a number)")
 
     # Validate dates - return date must be on or after the hire date
-    if calendar2.get_date() < calendar.get_date():
+    if date_to_entry.get_date() < date_from_entry.get_date():
         error_print_list.append("return date (must be on or after hire date)")
 
     # If no errors were found, create the record and add it to the database
@@ -132,8 +132,8 @@ def add():
             "receipt_no": receipt_number.get(),
             "item":       item_hired.get(),
             "quantity":   int(number_hired.get()),
-            "date_from":  calendar.get_date(),
-            "date_to":    calendar2.get_date(),
+            "date_from":  date_from_entry.get_date(),
+            "date_to":    date_to_entry.get_date(),
         }
         database_list.append(record)  # add the new record to the database
         refresh_table(table)
@@ -207,7 +207,7 @@ bottom_frame.grid(row=1, column=0)
 table_setup()
 
 # ////////////////
-# Entry fields and calendar setup
+# Entry fields and date entry setup
 # ////////////////
 
 # Create entry fields for each input
@@ -217,9 +217,9 @@ receipt_number = Entry(top_frame)
 item_hired = Entry(top_frame)
 number_hired = Entry(top_frame)
 
-# Create calendar date widgets for hire date and return date
-calendar = DateEntry(top_frame, width=18, pady=5, background='darkblue', foreground='white', borderwidth=2)
-calendar2 = DateEntry(top_frame, width=18, pady=5, background='darkblue', foreground='white', borderwidth=2)
+# Create date entry widgets for hire date and return date
+date_from_entry = DateEntry(top_frame, width=18, pady=5, background='darkblue', foreground='white', borderwidth=2)
+date_to_entry = DateEntry(top_frame, width=18, pady=5, background='darkblue', foreground='white', borderwidth=2)
 
 # Entry field for specifying which row to delete
 row_id = Entry(top_frame)
@@ -230,8 +230,8 @@ last_name.grid(row=2, column=1, padx=10, pady=5)
 receipt_number.grid(row=3, column=1, padx=10, pady=5)
 item_hired.grid(row=4, column=1, padx=10, pady=5)
 number_hired.grid(row=5, column=1, padx=10, pady=5)
-calendar.grid(row=6, column=1, padx=10, pady=5, sticky=W)
-calendar2.grid(row=7, column=1, padx=10, pady=5, sticky=W)
+date_from_entry.grid(row=6, column=1, padx=10, pady=5, sticky=W)
+date_to_entry.grid(row=7, column=1, padx=10, pady=5, sticky=W)
 row_id.config(width=10)
 row_id.grid(row=9, column=1, padx=10, pady=5, sticky=E)
 
