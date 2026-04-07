@@ -162,7 +162,6 @@ def delete():
         if 1 <= target <= len(database_list):
             database_list.pop(target - 1)
             clear_fields(table)
-            print(f"Deleted row {target}")
         else:
             showerror("Not found", f"Row {target} not found")
             clear_fields(table)
