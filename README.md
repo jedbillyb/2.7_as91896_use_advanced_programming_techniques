@@ -1,3 +1,4 @@
+<a href="https://jedbillyb.com"><img align="right" src="https://img.shields.io/badge/jedbillyb.com-000?style=for-the-badge&logo=archlinux&logoColor=blue" /></a>
 # as91896-equipment-hire-manager
 NCEA AS91896 - tkinter GUI app for managing equipment hire records.
 
